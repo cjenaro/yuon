@@ -1,0 +1,59 @@
+<div class="page-show">
+  <div class="mb-4">
+    <%= link_to "← Back to pages", pages_path, class: "text-blue-500 hover:text-blue-700" %>
+  </div>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold"><%= @page.title %></h1>
+    <div class="flex gap-2">
+      <%= link_to "Edit", edit_page_path(@page), class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "Delete", page_path(@page), method: :delete, class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded", data: { confirm: "Are you sure?" } %>
+    </div>
+  </div>
+
+  <% if @page.parent_page %>
+    <div class="mb-4 text-sm">
+      <span class="text-gray-500">Parent page:</span>
+      <%= link_to @page.parent_page.title, page_path(@page.parent_page), class: "text-blue-500 hover:text-blue-700" %>
+    </div>
+  <% end %>
+
+  <% if @page.child_pages.any? %>
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Sub-pages</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <% @page.child_pages.each do |child| %>
+          <div class="border rounded p-3 hover:bg-gray-50">
+            <%= link_to child.title, page_path(child), class: "font-medium" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="blocks mt-8">
+    <% if @page.blocks.any? %>
+      <% @page.blocks.order(:position).each do |block| %>
+        <div class="block mb-4">
+          <% case block.blockable_type %>
+          <% when "Block::Heading" %>
+            <% heading = block.blockable %>
+            <div class="heading-<%= heading.level %>">
+              <%= tag.send("h#{heading.level}", heading.content, class: "font-bold #{'text-3xl' if heading.level == 1} #{'text-2xl' if heading.level == 2} #{'text-xl' if heading.level == 3} #{'text-lg' if heading.level == 4} #{'text-base' if heading.level == 5} #{'text-sm' if heading.level == 6}") %>
+            </div>
+          <% when "Block::Text" %>
+            <div class="text">
+              <%= simple_format(block.blockable.content) %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="text-gray-500 italic">This page is empty. Edit to add content.</div>
+    <% end %>
+  </div>
+
+  <div class="mt-8">
+    <%= link_to "Add new block", "#", class: "bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded" %>
+  </div>
+</div> 

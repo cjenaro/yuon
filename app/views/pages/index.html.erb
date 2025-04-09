@@ -1,0 +1,28 @@
+<div class="pages-index">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">My Pages</h1>
+    <%= link_to "New Page", new_page_path, class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" %>
+  </div>
+
+  <% if @pages.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% @pages.each do |page| %>
+        <div class="border rounded p-4 hover:shadow-md transition">
+          <h2 class="text-xl font-semibold mb-2"><%= link_to page.title, page_path(page) %></h2>
+          <div class="text-sm text-gray-500">
+            Created: <%= page.created_at.strftime("%b %d, %Y") %>
+          </div>
+          <div class="mt-2 flex justify-between">
+            <%= link_to "View", page_path(page), class: "text-blue-500 hover:text-blue-700" %>
+            <%= link_to "Edit", edit_page_path(page), class: "text-blue-500 hover:text-blue-700" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-gray-100 p-8 text-center rounded">
+      <p class="text-gray-600 mb-4">You don't have any pages yet.</p>
+      <%= link_to "Create your first page", new_page_path, class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" %>
+    </div>
+  <% end %>
+</div> 

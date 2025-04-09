@@ -1,0 +1,34 @@
+<%= form_with(model: page) do |form| %>
+  <% if page.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <h2><%= pluralize(page.errors.count, "error") %> prohibited this page from being saved:</h2>
+      <ul>
+        <% page.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :title, class: "block text-gray-700 font-medium mb-2" %>
+    <%= form.text_field :title, class: "w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :parent_page_id, "Parent Page (optional)", class: "block text-gray-700 font-medium mb-2" %>
+    <%= form.collection_select :parent_page_id, Current.user.pages.where.not(id: page.id), :id, :title, { include_blank: "None (top-level page)" }, class: "w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" %>
+  </div>
+
+  <div class="mb-4">
+    <div class="flex items-center">
+      <%= form.check_box :is_public, class: "mr-2" %>
+      <%= form.label :is_public, "Make this page public", class: "text-gray-700" %>
+    </div>
+    <p class="text-sm text-gray-500 mt-1">Public pages can be viewed by anyone with the link.</p>
+  </div>
+
+  <div class="flex justify-end">
+    <%= form.submit class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" %>
+  </div>
+<% end %> 
