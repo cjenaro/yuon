@@ -1,5 +1,5 @@
 class Block::Heading < ApplicationRecord
-  has_one :block, as: :blockable, dependent: :destroy
+  has_one :block, as: :blockable
   
   validates :content, presence: true
   validates :level, inclusion: { in: 1..6 }

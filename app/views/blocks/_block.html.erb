@@ -1,0 +1,13 @@
+<div id="<%= dom_id(block) %>" class="block">
+  <% if block.text? %>
+    <p><%= block.text.content %></p>
+  <% elsif block.heading? %>
+    <% tag_name = "h#{block.heading.level}" %>
+    <<%= tag_name %>><%= block.heading.content %></<%= tag_name %>>
+  <% end %>
+  
+  <div class="block-actions">
+    <%= button_to "Delete", page_block_path(block.page, block), method: :delete, class: "btn btn-sm btn-danger" %>
+    <%= link_to "Edit", "#", class: "btn btn-sm btn-primary edit-block-btn", data: { block_id: block.id } %>
+  </div>
+</div> 

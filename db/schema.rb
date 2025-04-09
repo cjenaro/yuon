@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_09_143020) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_09_145118) do
   create_table "block_headings", force: :cascade do |t|
     t.integer "level"
     t.string "content"
@@ -41,6 +41,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_09_143020) do
     t.integer "parent_page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_public", default: true
     t.index ["parent_page_id"], name: "index_pages_on_parent_page_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end

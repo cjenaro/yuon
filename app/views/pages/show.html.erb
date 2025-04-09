@@ -31,29 +31,36 @@
     </div>
   <% end %>
 
-  <div class="blocks mt-8">
-    <% if @page.blocks.any? %>
-      <% @page.blocks.order(:position).each do |block| %>
-        <div class="block mb-4">
-          <% case block.blockable_type %>
-          <% when "Block::Heading" %>
-            <% heading = block.blockable %>
-            <div class="heading-<%= heading.level %>">
-              <%= tag.send("h#{heading.level}", heading.content, class: "font-bold #{'text-3xl' if heading.level == 1} #{'text-2xl' if heading.level == 2} #{'text-xl' if heading.level == 3} #{'text-lg' if heading.level == 4} #{'text-base' if heading.level == 5} #{'text-sm' if heading.level == 6}") %>
-            </div>
-          <% when "Block::Text" %>
-            <div class="text">
-              <%= simple_format(block.blockable.content) %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    <% else %>
-      <div class="text-gray-500 italic">This page is empty. Edit to add content.</div>
+  <div class="blocks-container prose">
+    <% @page.blocks.order(:position).each do |block| %>
+      <%= render 'blocks/block', block: block %>
     <% end %>
   </div>
 
-  <div class="mt-8">
-    <%= link_to "Add new block", "#", class: "bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded" %>
+  <div class="mt-6">
+    <button id="show-block-form" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+      Add block
+    </button>
+    
+    <div id="block-form-container" class="mt-4 hidden">
+      <%= render 'blocks/form', page: @page %>
+    </div>
+  </div>
+
+  <div class="page-actions mt-4">
+    <%= link_to "Edit Page", edit_page_path(@page), class: "btn btn-primary" %>
+    <%= link_to "Back to Pages", pages_path, class: "btn btn-secondary" %>
   </div>
 </div> 
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const showFormButton = document.getElementById('show-block-form');
+    const formContainer = document.getElementById('block-form-container');
+    
+    showFormButton.addEventListener('click', function() {
+      formContainer.classList.toggle('hidden');
+      showFormButton.textContent = formContainer.classList.contains('hidden') ? 'Add block' : 'Cancel';
+    });
+  });
+</script>
