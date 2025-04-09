@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :users, only: [:new, :create]
   resources :pages do
-    resources :blocks, only: [:create, :update, :destroy]
+    resources :blocks, only: [:create, :update, :destroy] do
+      member do
+        patch :move_up
+        patch :move_down
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

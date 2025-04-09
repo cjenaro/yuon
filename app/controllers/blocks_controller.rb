@@ -50,6 +50,40 @@ class BlocksController < ApplicationController
     end
   end
 
+  def move_up
+    @block = @page.blocks.find(params[:id])
+    previous_block = @page.blocks.where("position < ?", @block.position).order(position: :desc).first
+    
+    if previous_block
+      @block.update(position: previous_block.position)
+      previous_block.update(position: @block.position_was)
+      
+      respond_to do |format|
+        format.html { redirect_to @page }
+        format.turbo_stream { render :reorder }
+      end
+    else
+      redirect_to @page
+    end
+  end
+
+  def move_down
+    @block = @page.blocks.find(params[:id])
+    next_block = @page.blocks.where("position > ?", @block.position).order(:position).first
+    
+    if next_block
+      @block.update(position: next_block.position)
+      next_block.update(position: @block.position_was)
+      
+      respond_to do |format|
+        format.html { redirect_to @page }
+        format.turbo_stream { render :reorder }
+      end
+    else
+      redirect_to @page
+    end
+  end
+
   private
 
   def set_page

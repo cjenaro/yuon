@@ -31,7 +31,7 @@
     </div>
   <% end %>
 
-  <div class="blocks-container prose">
+  <div id="blocks" class="prose">
     <% @page.blocks.order(:position).each do |block| %>
       <%= render 'blocks/block', block: block %>
     <% end %>

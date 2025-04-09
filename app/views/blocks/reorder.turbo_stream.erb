@@ -1,0 +1,5 @@
+<%= turbo_stream.update "blocks" do %>
+  <% @page.blocks.order(:position).each do |block| %>
+    <%= render 'blocks/block', block: block %>
+  <% end %>
+<% end %> 
