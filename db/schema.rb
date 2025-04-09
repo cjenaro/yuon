@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_09_142649) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_09_143020) do
+  create_table "block_headings", force: :cascade do |t|
+    t.integer "level"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "block_texts", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "page_id", null: false
+    t.string "blockable_type", null: false
+    t.integer "blockable_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blockable_type", "blockable_id"], name: "index_blocks_on_blockable"
+    t.index ["page_id"], name: "index_blocks_on_page_id"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "title"
     t.integer "user_id", null: false
@@ -39,6 +63,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_09_142649) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "blocks", "pages"
   add_foreign_key "pages", "pages", column: "parent_page_id"
   add_foreign_key "pages", "users"
   add_foreign_key "sessions", "users"
