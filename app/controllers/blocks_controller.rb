@@ -84,6 +84,16 @@ class BlocksController < ApplicationController
     end
   end
 
+  def new
+    @page = Page.find(params[:page_id])
+    @block = @page.blocks.build
+  end
+
+  def cancel
+    @page = Page.find(params[:page_id])
+    render :cancel
+  end
+
   private
 
   def set_page

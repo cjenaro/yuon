@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_09_145118) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_09_192727) do
   create_table "block_headings", force: :cascade do |t|
     t.integer "level"
     t.string "content"
@@ -33,6 +33,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_09_145118) do
     t.datetime "updated_at", null: false
     t.index ["blockable_type", "blockable_id"], name: "index_blocks_on_blockable"
     t.index ["page_id"], name: "index_blocks_on_page_id"
+  end
+
+  create_table "page_accesses", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "page_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_id"], name: "index_page_accesses_on_page_id"
+    t.index ["user_id", "page_id"], name: "index_page_accesses_on_user_id_and_page_id", unique: true
+    t.index ["user_id"], name: "index_page_accesses_on_user_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -65,6 +75,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_09_145118) do
   end
 
   add_foreign_key "blocks", "pages"
+  add_foreign_key "page_accesses", "pages"
+  add_foreign_key "page_accesses", "users"
   add_foreign_key "pages", "pages", column: "parent_page_id"
   add_foreign_key "pages", "users"
   add_foreign_key "sessions", "users"

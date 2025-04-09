@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "block_form_container" do %>
+  <%= link_to "Add block", new_page_block_path(@page), 
+      data: { turbo_frame: "block_form_container" },
+      class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" %>
+<% end %> 

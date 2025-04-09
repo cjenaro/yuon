@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :users, only: [:new, :create]
   resources :pages do
-    resources :blocks, only: [:create, :update, :destroy] do
+    resources :blocks, only: [:new, :create, :update, :destroy] do
+      collection do
+        get :cancel
+      end
       member do
         patch :move_up
         patch :move_down

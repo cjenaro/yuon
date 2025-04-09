@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "block_form_container" do %>
+  <%= link_to "Cancel", cancel_page_blocks_path(@page), 
+      data: { turbo_frame: "block_form_container" },
+      class: "bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded" %>
+  
+  <div class="mt-4">
+    <%= render 'blocks/form', page: @page %>
+  </div>
+<% end %> 
