@@ -1,10 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["pageItem", "children", "dropdown", "searchInput"]
+  static targets = ["pageItem", "children", "dropdown", "searchInput", "sidebarPanel", "overlay"]
   static values = { expandedPages: Object }
 
   connect() {
+    this.closeSidebar();
+    
     this.setupEventListeners()
   }
 
@@ -91,5 +93,27 @@ export default class extends Controller {
         }
       }
     })
+  }
+
+  toggleSidebar() {
+    if (this.sidebarPanelTarget.classList.contains('translate-x-0')) {
+      this.closeSidebar();
+    } else {
+      this.openSidebar();
+    }
+  }
+
+  openSidebar() {
+    this.sidebarPanelTarget.classList.remove('-translate-x-full');
+    this.sidebarPanelTarget.classList.add('translate-x-0');
+    this.overlayTarget.classList.remove('hidden');
+  }
+
+  closeSidebar() {
+    if (window.innerWidth < 1024) {
+      this.sidebarPanelTarget.classList.remove('translate-x-0');
+      this.sidebarPanelTarget.classList.add('-translate-x-full');
+      this.overlayTarget.classList.add('hidden');
+    }
   }
 } 

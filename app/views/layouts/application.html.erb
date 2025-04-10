@@ -22,17 +22,22 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="grid grid-rows-[auto_1fr] min-h-screen">
     <header class="bg-gray-100 p-4 flex justify-between items-center">
       <div class="logo">
-        <%= link_to "Yuon", root_path, class: "text-xl font-bold" %>
+        <%= link_to "Yuon", root_path, class: "text-xl font-bold lg:ml-0 ml-14" %>
       </div>
       
       <div class="auth-section">
         <% if Current.user %>
           <div class="flex items-center gap-4">
             <span><%= Current.user.email_address.split("@").first %></span>
-            <%= button_to "Log out", session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" %>
+            <%= button_to session_path, method: :delete, class: "cursor-pointer bg-gray-200 bg-opacity-70 hover:bg-gray-300 px-3 py-1.5 rounded-md text-gray-700 flex items-center" do %>
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              <span class="ml-1">Sign out</span>
+            <% end %>
           </div>
         <% else %>
           <div class="flex items-center gap-4">
