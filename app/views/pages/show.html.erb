@@ -26,23 +26,15 @@
     </div>
   </div>
 
-  <% if @page.parent_page %>
-    <div class="mb-4 text-sm">
-      <span class="text-gray-500">Parent page:</span>
-      <%= link_to @page.parent_page.title, page_path(@page.parent_page), class: "text-blue-500 hover:text-blue-700" %>
-    </div>
-  <% end %>
-
   <% if @page.child_pages.any? %>
     <div class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Sub-pages</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <ul class="list-disc pl-5">
         <% @page.child_pages.each do |child| %>
-          <div class="border rounded p-3 hover:bg-gray-50">
-            <%= link_to child.title, page_path(child), class: "font-medium" %>
-          </div>
+          <li class="mb-1">
+            <%= link_to child.title, page_path(child), class: "font-bold hover:underline" %>
+          </li>
         <% end %>
-      </div>
+      </ul>
     </div>
   <% end %>
 
