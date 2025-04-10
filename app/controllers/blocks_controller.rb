@@ -4,13 +4,8 @@ class BlocksController < ApplicationController
 
   def create
     @block = @page.blocks.new(position: @page.blocks.count)
-    
-    case block_params[:blockable_type]
-    when 'Block::Text'
-      @block.build_text(content: block_params[:content])
-    when 'Block::Heading'
-      @block.build_heading(content: block_params[:content], level: block_params[:level])
-    end
+    @block_type = params[:block][:blockable_type].to_s.demodulize.underscore
+    @block.build_blockable(@block_type, block_params)
 
     if @block.save
       respond_to do |format|
@@ -20,7 +15,7 @@ class BlocksController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to @page, alert: 'Failed to create block.' }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_block_form', partial: 'blocks/form', locals: { page: @page, block: @block }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_block_form', partial: 'blocks/form', locals: { page: @page, block: @block, block_type: @block_type }) }
       end
     end
   end
@@ -85,8 +80,10 @@ class BlocksController < ApplicationController
   end
 
   def new
-    @page = Page.find(params[:page_id])
-    @block = @page.blocks.build
+    @block = Block.new
+    @block_type = params[:type] || 'text'
+    
+    render :new
   end
 
   def cancel
