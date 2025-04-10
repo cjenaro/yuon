@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_breadcrumbs, only: [:show, :edit]
   
   def index
     @pages = Current.user.pages.where(parent_page_id: nil)
@@ -46,6 +47,22 @@ class PagesController < ApplicationController
     @page = Current.user.pages.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to pages_path, alert: "Page not found or you don't have access to it."
+  end
+  
+  def set_breadcrumbs
+    @breadcrumbs = []
+    current_page = @page
+    
+    while current_page
+      @breadcrumbs.push({ 
+        title: current_page.title, 
+        path: current_page == @page ? nil : page_path(current_page)
+      })
+      current_page = current_page.parent_page
+    end
+
+    @breadcrumbs.push({ title: "Pages", path: pages_path })
+    @breadcrumbs.reverse!
   end
   
   def page_params

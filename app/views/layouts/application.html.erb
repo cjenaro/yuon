@@ -60,6 +60,10 @@
           </div>
         <% end %>
         
+        <% if @breadcrumbs.present? %>
+          <%= render 'shared/breadcrumbs' %>
+        <% end %>
+        
         <%= yield %>
       </main>
     </div>
