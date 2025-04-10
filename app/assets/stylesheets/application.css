@@ -8,3 +8,32 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+[data-controller="confirm-action"] {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-controller="confirm-action"].confirming::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  background-color: currentColor;
+  opacity: 0.1;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation: confirm-countdown linear forwards;
+  transform-origin: left;
+  animation-duration: var(--confirm-duration);
+}
+
+@keyframes confirm-countdown {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
