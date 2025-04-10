@@ -41,6 +41,11 @@ class PagesController < ApplicationController
     redirect_to pages_path, notice: "Page was successfully deleted."
   end
   
+  def update_sidebar_state
+    session[:expanded_pages] = params[:expanded_pages]
+    head :ok
+  end
+  
   private
   
   def set_page

@@ -1,9 +1,10 @@
-<div class="page-item mb-1">
+<% expanded = (session[:expanded_pages] || {}).key?(page.id.to_s) %>
+<div class="page-item mb-1" data-sidebar-target="pageItem" data-page-id="<%= page.id %>">
   <div class="flex items-center justify-between gap-2">
     <% if page.child_pages.any? %>
-        <button class="toggle-children text-gray-500 hover:text-gray-700">
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <button class="cursor-pointer toggle-children text-gray-500 hover:text-gray-700" data-action="click->sidebar#toggleChildren">
+            <svg class="h-4 w-4 <%= expanded ? 'transform rotate-180' : '' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
         </button>
     <% end %>
@@ -12,7 +13,7 @@
       <%= link_to page.title, page_path(page), class: "text-gray-700 hover:text-blue-500 truncate flex-grow" %>
       
       <div class="relative ml-2 page-actions">
-        <button class="text-gray-500 hover:text-gray-700 focus:outline-none" id="page-menu-<%= page.id %>">
+        <button class="cursor-pointer text-gray-500 hover:text-gray-700 focus:outline-none" id="page-menu-<%= page.id %>" data-action="click->sidebar#toggleMenu">
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
           </svg>
@@ -37,7 +38,7 @@
   </div>
   
   <% if page.child_pages.any? %>
-    <div class="children pl-2 ml-2 border-l-2 border-gray-300 mt-1 hidden">
+    <div class="children pl-2 ml-2 border-l-2 border-gray-300 mt-1 <%= expanded ? '' : 'hidden' %>">
       <% page.child_pages.each do |child| %>
         <%= render partial: 'shared/page_tree_item', locals: { page: child } %>
       <% end %>

@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#index"
+
+  post 'update_sidebar_state', to: 'pages#update_sidebar_state'
 end
