@@ -5,63 +5,81 @@
   <% when 'h1' %>
     <div class="flex-grow ">
       <%= f.text_field :content, 
+                      value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-4xl font-bold", 
                       autofocus: true,
-                      placeholder: "Heading 1..." %>
+                      placeholder: "Heading 1...",
+                      data: { controller: "cursor-position" } %>
     </div>
   <% when 'h2' %>
     <div class="flex-grow ">
       <%= f.text_field :content, 
+                      value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-3xl font-bold", 
                       autofocus: true,
-                      placeholder: "Heading 2..." %>
+                      placeholder: "Heading 2...",
+                      data: { controller: "cursor-position" } %>
     </div>
   <% when 'h3' %>
     <div class="flex-grow ">
       <%= f.text_field :content, 
+                      value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-2xl font-bold", 
                       autofocus: true,
-                      placeholder: "Heading 3..." %>
+                      placeholder: "Heading 3...",
+                      data: { controller: "cursor-position" } %>
     </div>
   <% when 'text' %>
     <div class="flex-grow ">
       <%= f.text_field :content, 
+                      value: @block.blockable&.content,
                       class: "w-full focus:outline-none prose-p", 
                       autofocus: true, 
-                      placeholder: "Some text..." %>
+                      placeholder: "Some text...",
+                      data: { controller: "cursor-position" } %>
     </div>
   <% when 'image' %>
     <div class="flex-grow ">
       <%= f.url_field :url, 
+                      value: @block.blockable&.url,
                       class: "w-full focus:outline-none", 
                       autofocus: true,
-                      placeholder: "Image URL..." %>
+                      placeholder: "Image URL...",
+                      data: { controller: "cursor-position" } %>
     </div>
     
     <div class="flex-grow ">
       <%= f.text_field :content, 
+                      value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-sm text-gray-500 italic", 
-                      placeholder: "Image caption (optional)..." %>
+                      placeholder: "Image caption (optional)...",
+                      data: { controller: "cursor-position" } %>
     </div>
   <% when 'code' %>
     <div class="flex-grow ">
       <%= f.text_field :language, 
+                      value: @block.blockable&.language,
                       class: "w-full focus:outline-none", 
                       autofocus: true,
-                      placeholder: "Language (e.g. javascript, ruby, html)..." %>
+                      placeholder: "Language (e.g. javascript, ruby, html)...",
+                      data: { controller: "cursor-position" } %>
     </div>
     
     <div class="flex-grow ">
       <%= f.text_area :content, 
+                      value: @block.blockable&.content,
                       class: "w-full focus:outline-none min-h-[150px] font-mono text-sm bg-gray-50", 
-                      placeholder: "Paste or type code here..." %>
+                      placeholder: "Paste or type code here...",
+                      data: { controller: "cursor-position" } %>
     </div>
   <% else %>
     <div class="flex-grow ">
       <%= f.text_field :content, 
+                      value: @block.blockable&.content,
                       class: "w-full focus:outline-none", 
                       autofocus: true,
-                      placeholder: "Enter content..." %>
+                      placeholder: "Enter content...",
+                      data: { controller: "cursor-position" } %>
     </div>
   <% end %>
   

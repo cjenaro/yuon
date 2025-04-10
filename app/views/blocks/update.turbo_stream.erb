@@ -1,0 +1,7 @@
+<%= turbo_stream.replace dom_id(@block) do %>
+  <%= render "blocks/block", block: @block %>
+<% end %>
+
+<%= turbo_stream.replace "block_form_container" do %>
+  <%= render template: "blocks/cancel" %>
+<% end %> 

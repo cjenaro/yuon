@@ -1,6 +1,6 @@
 class BlocksController < ApplicationController
   before_action :set_page
-  before_action :set_block, only: [:update, :destroy]
+  before_action :set_block, only: [:edit, :update, :destroy]
 
   def create
     @block = @page.blocks.new(position: @page.blocks.count)
@@ -23,7 +23,9 @@ class BlocksController < ApplicationController
   def update
     blockable = @block.blockable
     
-    if blockable.update(blockable_params)
+    valid_attributes = block_params.slice(*blockable.class.attribute_names)
+    
+    if blockable.update(valid_attributes)
       respond_to do |format|
         format.html { redirect_to @page }
         format.turbo_stream
@@ -91,6 +93,17 @@ class BlocksController < ApplicationController
     render :cancel
   end
 
+  def edit
+    @page = Page.find(params[:page_id])
+    @block = @page.blocks.find(params[:id])
+    @block_type = @block.blockable_type.demodulize.underscore
+    
+    respond_to do |format|
+      format.html { render :edit }
+      format.turbo_stream
+    end
+  end
+
   private
 
   def set_page
@@ -102,17 +115,6 @@ class BlocksController < ApplicationController
   end
 
   def block_params
-    params.require(:block).permit(:blockable_type, :content, :level)
-  end
-
-  def blockable_params
-    case @block.blockable_type
-    when 'Block::Text'
-      { content: block_params[:content] }
-    when 'Block::Heading'
-      { content: block_params[:content], level: block_params[:level] }
-    else
-      {}
-    end
+    params.require(:block).permit(:blockable_type, :content, :level, :url, :language, :position)
   end
 end 
