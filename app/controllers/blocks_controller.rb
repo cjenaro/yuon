@@ -3,7 +3,7 @@ class BlocksController < ApplicationController
   before_action :set_block, only: [:edit, :update, :destroy]
 
   def create
-    @block = @page.blocks.new(position: @page.blocks.count)
+    @block = @page.blocks.new(position: @page.blocks.maximum(:position).to_i + 1)
     @block_type = params[:block][:blockable_type].to_s.demodulize.underscore
     @block.build_blockable(@block_type, block_params)
 
