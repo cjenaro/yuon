@@ -7,7 +7,7 @@
       <<%= tag_name %>><%= block.heading.content %></<%= tag_name %>>
     <% end %>
     
-    <div class="absolute right-0 top-0 hidden group-hover:flex group-focus:flex items-center space-x-2 rounded bg-white border border-gray-200 p-1">
+    <div class="absolute right-0 top-0 hidden group-hover:flex group-focus:flex group-focus-within:flex items-center space-x-2 rounded bg-white border border-gray-200 p-1">
       <%= button_to page_block_path(block.page, block), 
                     method: :delete, 
                     class: "p-1 flex text-red-500 hover:bg-red-50",
