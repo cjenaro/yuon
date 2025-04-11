@@ -53,6 +53,10 @@ An open-source, self-hostable alternative to Notion built with modern Rails.
 
 5. Visit `http://localhost:3000` in your browser
 
+## Authentication
+
+This application doesn't support user registration. You can only login with seeded accounts. Check `db/seeds.rb` for generated accounts.
+
 ## Development
 
 * Run tests: `bin/rails test`
