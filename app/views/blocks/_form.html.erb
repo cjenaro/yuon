@@ -1,9 +1,9 @@
-<%= form_with model: [@page, @block], class: "relative flex items-center", data: { turbo: true } do |f| %>
+<%= form_with model: [@page, @block], class: "relative flex items-center", data: { turbo: true }, html: { multipart: true } do |f| %>
   <%= f.hidden_field :blockable_type, value: "Block::#{@block_type.camelize}" %>
   
   <% case @block_type %>
   <% when 'h1' %>
-    <div class="flex-grow ">
+    <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-4xl font-bold", 
@@ -12,7 +12,7 @@
                       data: { controller: "cursor-position" } %>
     </div>
   <% when 'h2' %>
-    <div class="flex-grow ">
+    <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-3xl font-bold", 
@@ -21,7 +21,7 @@
                       data: { controller: "cursor-position" } %>
     </div>
   <% when 'h3' %>
-    <div class="flex-grow ">
+    <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-2xl font-bold", 
@@ -30,7 +30,7 @@
                       data: { controller: "cursor-position" } %>
     </div>
   <% when 'text' %>
-    <div class="flex-grow ">
+    <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
                       class: "w-full focus:outline-none prose-p", 
@@ -39,21 +39,22 @@
                       data: { controller: "cursor-position" } %>
     </div>
   <% when 'image' %>
-    <div class="flex-grow ">
-      <%= f.url_field :url, 
-                      value: @block.blockable&.url,
+    <div class="flex-grow flex flex-col gap-2">
+      <div class="flex-grow">
+        <%= f.file_field :image, 
                       class: "w-full focus:outline-none", 
                       autofocus: true,
-                      placeholder: "Image URL...",
+                      accept: "image/*",
                       data: { controller: "cursor-position" } %>
-    </div>
-    
-    <div class="flex-grow ">
-      <%= f.text_field :content, 
+      </div>
+      
+      <div class="flex-grow">
+        <%= f.text_field :content, 
                       value: @block.blockable&.content,
                       class: "w-full focus:outline-none text-sm text-gray-500 italic", 
                       placeholder: "Image caption (optional)...",
                       data: { controller: "cursor-position" } %>
+      </div>
     </div>
   <% when 'code' %>
     <div class="flex flex-grow flex-col gap-2">

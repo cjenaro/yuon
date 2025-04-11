@@ -115,6 +115,6 @@ class BlocksController < ApplicationController
   end
 
   def block_params
-    params.require(:block).permit(:blockable_type, :content, :level, :url, :language, :position)
+    params.require(:block).permit(:blockable_type, :content, :level, :url, :language, :position, :image)
   end
 end 

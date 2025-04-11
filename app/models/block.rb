@@ -23,8 +23,14 @@ class Block < ApplicationRecord
     
     if Object.const_defined?(class_name)
       klass = class_name.constantize
+      
+      image_file = attributes.delete(:image) if type.to_s == 'image' && attributes[:image].present?
       valid_attributes = attributes.slice(*klass.attribute_names)
       self.blockable = klass.new(valid_attributes)
+      
+      if image_file && self.blockable.respond_to?(:image)
+        self.blockable.image.attach(image_file)
+      end
     else
       raise ArgumentError, "Unknown block type: #{type}"
     end
