@@ -1,10 +1,14 @@
 <%= turbo_frame_tag dom_id(block) do %>
   <div class="block relative group" tabindex="0">
-    <% if block.text? %>
-      <p><%= block.text.content %></p>
-    <% elsif block.heading? %>
-      <% tag_name = "h#{block.heading.level}" %>
-      <<%= tag_name %>><%= block.heading.content %></<%= tag_name %>>
+    <% case block.blockable_type %>
+    <% when 'Block::Text' %>
+      <p><%= block.blockable.content %></p>
+    <% when 'Block::H1', 'Block::H2', 'Block::H3' %>
+      <% level = block.blockable_type[-1] %>
+      <% tag_name = "h#{level}" %>
+      <<%= tag_name %>><%= block.blockable.content %></<%= tag_name %>>
+    <% when 'Block::Code' %>
+      <pre><code class="language-<%= block.blockable.language %>"><%= block.blockable.content %></code></pre>
     <% end %>
     
     <div class="absolute right-0 top-0 hidden group-hover:flex group-focus:flex group-focus-within:flex items-center space-x-2 rounded bg-white border border-gray-200 p-1">

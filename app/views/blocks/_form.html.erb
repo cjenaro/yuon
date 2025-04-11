@@ -56,21 +56,26 @@
                       data: { controller: "cursor-position" } %>
     </div>
   <% when 'code' %>
-    <div class="flex-grow ">
-      <%= f.text_field :language, 
-                      value: @block.blockable&.language,
-                      class: "w-full focus:outline-none", 
-                      autofocus: true,
-                      placeholder: "Language (e.g. javascript, ruby, html)...",
-                      data: { controller: "cursor-position" } %>
-    </div>
-    
-    <div class="flex-grow ">
-      <%= f.text_area :content, 
-                      value: @block.blockable&.content,
-                      class: "w-full focus:outline-none min-h-[150px] font-mono text-sm bg-gray-50", 
-                      placeholder: "Paste or type code here...",
-                      data: { controller: "cursor-position" } %>
+    <div class="flex flex-grow flex-col gap-2">
+      <div class="flex-grow">
+        <%= f.select :language, 
+                    options_for_select(Block::Code.languages.keys.map { |lang| [lang.humanize, lang] }, @block.blockable&.language),
+                    {},
+                    class: "w-full focus:outline-none", 
+                    autofocus: true,
+                    placeholder: "Language (e.g. javascript, ruby, html)...",
+                    data: { controller: "cursor-position" } %>
+      </div>
+      
+      <hr class="w-full border-gray-200">
+      
+      <div class="flex-grow">
+        <%= f.text_area :content, 
+                        value: @block.blockable&.content,
+                        class: "w-full focus:outline-none min-h-[150px] font-mono text-sm bg-gray-50 p-4 rounded-md", 
+                        placeholder: "Paste or type code here...",
+                        data: { controller: "cursor-position" } %>
+      </div>
     </div>
   <% else %>
     <div class="flex-grow ">

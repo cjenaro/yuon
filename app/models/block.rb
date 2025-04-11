@@ -29,20 +29,4 @@ class Block < ApplicationRecord
       raise ArgumentError, "Unknown block type: #{type}"
     end
   end
-
-  def text?
-    blockable_type == 'Block::Text'
-  end
-
-  def heading?
-    ['Block::H1', 'Block::H2', 'Block::H3'].include?(blockable_type)
-  end
-
-  def text
-    blockable if text?
-  end
-
-  def heading
-    blockable if heading?
-  end
 end
