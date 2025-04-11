@@ -17,7 +17,7 @@ admin = User.find_or_create_by!(email_address: "jenaro@hey.com") do |user|
 end
 
 # Create regular users
-["john@example.com", "jane@example.com", "test@example.com"].each do |email|
+[ "john@example.com", "jane@example.com", "test@example.com" ].each do |email|
   User.find_or_create_by!(email_address: email) do |user|
     user.password = "password123"
     user.password_confirmation = "password123"

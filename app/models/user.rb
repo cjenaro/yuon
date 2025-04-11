@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   def accessible_pages
     Page.left_joins(:page_accesses)
-        .where('pages.user_id = ? OR pages.is_public = ? OR page_accesses.user_id = ?', 
+        .where("pages.user_id = ? OR pages.is_public = ? OR page_accesses.user_id = ?",
                id, true, id)
         .distinct
   end

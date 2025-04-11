@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
-  resources :users, only: [:new, :create]
+  resources :users, only: [ :new, :create ]
   resources :pages do
-    resources :blocks, only: [:new, :create, :edit, :update, :destroy] do
+    resources :blocks, only: [ :new, :create, :edit, :update, :destroy ] do
       collection do
         get :cancel
       end
@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#index"
 
-  post 'update_sidebar_state', to: 'pages#update_sidebar_state'
+  post "update_sidebar_state", to: "pages#update_sidebar_state"
 end

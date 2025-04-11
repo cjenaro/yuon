@@ -9,7 +9,7 @@ class Block::Code < ApplicationRecord
     ruby: "ruby",
     python: "python",
     java: "java",
-    csharp: "csharp",
+    csharp: "csharp"
   }
 
   validates :language, presence: true
