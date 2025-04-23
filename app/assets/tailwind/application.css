@@ -1,2 +1,193 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* for now */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* @theme {
+	--color-fg-950: oklch(0.2 0.06 210.53); 
+	--color-fg-900: oklch(0.26 0.07 210.53);
+	--color-fg-800: oklch(0.33 0.08 210.53);
+	--color-fg-700: oklch(0.4 0.09 210.53);
+	--color-fg-600: oklch(0.48 0.09 210.53);
+	--color-fg-500: oklch(0.55 0.1 210.53);
+	--color-fg-400: oklch(0.63 0.09 210.53);
+	--color-fg-300: oklch(0.71 0.08 210.53);
+	--color-fg-200: oklch(0.8 0.06 210.53);
+	--color-fg-100: oklch(0.88 0.04 210.53);
+	--color-fg-50: oklch(0.95 0.02 210.53);
+
+	--color-bg-950: oklch(0.18 0.03 145.53);
+	--color-bg-900: oklch(0.23 0.04 145.53);
+	--color-bg-800: oklch(0.3 0.05 145.53);
+	--color-bg-700: oklch(0.37 0.05 145.53);
+	--color-bg-600: oklch(0.45 0.06 145.53);
+	--color-bg-500: oklch(0.53 0.07 145.53);
+	--color-bg-400: oklch(0.62 0.07 145.53);
+	--color-bg-300: oklch(0.72 0.06 145.53);
+	--color-bg-200: oklch(0.82 0.05 145.53);
+	--color-bg-100: oklch(0.9 0.03 145.53);
+	--color-bg-50: oklch(0.97 0.01 145.53);
+
+	--color-accent-950: oklch(0.35 0.15 45.53);
+	--color-accent-900: oklch(0.4 0.17 45.53);
+	--color-accent-800: oklch(0.48 0.19 45.53);
+	--color-accent-700: oklch(0.55 0.2 45.53);
+	--color-accent-600: oklch(0.62 0.21 45.53);
+	--color-accent-500: oklch(0.68 0.22 45.53);
+	--color-accent-400: oklch(0.74 0.2 45.53);
+	--color-accent-300: oklch(0.8 0.18 45.53);
+	--color-accent-200: oklch(0.86 0.15 45.53);
+	--color-accent-100: oklch(0.92 0.1 45.53);
+	--color-accent-50: oklch(0.97 0.05 45.53);
+
+	--font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+	--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+} */
+
+/* 
+ * THEME 1 - Blue Ocean
+ * To use: Replace the @theme block above with this one
+ */
+/* @theme {
+   --color-fg-950: #03045e;
+   --color-fg-900: #023e8a;
+   --color-fg-800: #0077b6;
+   --color-fg-700: #0096c7;
+   --color-fg-600: #00b4d8;
+   --color-fg-500: #48cae4;
+   --color-fg-400: #90e0ef;
+   --color-fg-300: #ade8f4;
+   --color-fg-200: #caf0f8;
+   --color-fg-100: #e1f5fa;
+   --color-fg-50: #f0fafd;
+ 
+   --color-bg-950: #03045e;
+   --color-bg-900: #023e8a;
+   --color-bg-800: #0077b6;
+   --color-bg-700: #0096c7;
+   --color-bg-600: #00b4d8;
+   --color-bg-500: #48cae4;
+   --color-bg-400: #90e0ef;
+   --color-bg-300: #ade8f4;
+   --color-bg-200: #caf0f8;
+   --color-bg-100: #e1f5fa;
+   --color-bg-50: #f0fafd;
+ 
+   --color-accent-950: #03045e;
+   --color-accent-900: #023e8a;
+   --color-accent-800: #0077b6;
+   --color-accent-700: #0096c7;
+   --color-accent-600: #00b4d8;
+   --color-accent-500: #48cae4;
+   --color-accent-400: #90e0ef;
+   --color-accent-300: #ade8f4;
+   --color-accent-200: #caf0f8;
+   --color-accent-100: #e1f5fa;
+   --color-accent-50: #f0fafd;
+ 
+   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+ 
+   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+} */
+
+/* 
+ * THEME 2 - Classic Red & Blue
+ * To use: Replace the @theme block above with this one
+ */
+@theme {
+	--color-fg-950: #780000;
+	--color-fg-900: #8d1515;
+	--color-fg-800: #c1121f;
+	--color-fg-700: #d32c39;
+	--color-fg-600: #e04853;
+	--color-fg-500: #e9696f;
+	--color-fg-400: #f18b8e;
+	--color-fg-300: #f5acae;
+	--color-fg-200: #f9cdce;
+	--color-fg-100: #fce6e7;
+	--color-fg-50: #fdf0d5;
+
+	--color-bg-950: #003049;
+	--color-bg-900: #0a3e59;
+	--color-bg-800: #204c69;
+	--color-bg-700: #355b79;
+	--color-bg-600: #4a6989;
+	--color-bg-500: #5f7999;
+	--color-bg-400: #669bbc;
+	--color-bg-300: #81adc7;
+	--color-bg-200: #9cc0d3;
+	--color-bg-100: #b7d2de;
+	--color-bg-50: #d2e5ea;
+
+	--color-accent-950: #780000;
+	--color-accent-900: #8d1515;
+	--color-accent-800: #a22a2a;
+	--color-accent-700: #c1121f;
+	--color-accent-600: #d32c39;
+	--color-accent-500: #e04853;
+	--color-accent-400: #e9696f;
+	--color-accent-300: #f18b8e;
+	--color-accent-200: #f5acae;
+	--color-accent-100: #f9cdce;
+	--color-accent-50: #fdf0d5;
+
+	--font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+	--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 
+ * THEME 3 - Rainbow Gradient
+ * To use: Replace the @theme block above with this one
+ */
+/* @theme {
+   --color-fg-950: #f72585;
+   --color-fg-900: #b5179e;
+   --color-fg-800: #7209b7;
+   --color-fg-700: #560bad;
+   --color-fg-600: #480ca8;
+   --color-fg-500: #3a0ca3;
+   --color-fg-400: #3f37c9;
+   --color-fg-300: #4361ee;
+   --color-fg-200: #4895ef;
+   --color-fg-100: #4cc9f0;
+   --color-fg-50: #a5e0f5;
+ 
+   --color-bg-950: #3a0ca3;
+   --color-bg-900: #3f37c9;
+   --color-bg-800: #4361ee;
+   --color-bg-700: #4895ef;
+   --color-bg-600: #4cc9f0;
+   --color-bg-500: #70d3f3;
+   --color-bg-400: #94ddf6;
+   --color-bg-300: #b8e7f9;
+   --color-bg-200: #dcf1fc;
+   --color-bg-100: #eef8fd;
+   --color-bg-50: #f5fcfe;
+ 
+   --color-accent-950: #f72585;
+   --color-accent-900: #e01d78;
+   --color-accent-800: #c91a6b;
+   --color-accent-700: #b5179e;
+   --color-accent-600: #9313aa;
+   --color-accent-500: #7209b7;
+   --color-accent-400: #640ab2;
+   --color-accent-300: #560bad;
+   --color-accent-200: #480ca8;
+   --color-accent-100: #3a0ca3;
+   --color-accent-50: #3f37c9;
+ 
+   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+ 
+   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+} */

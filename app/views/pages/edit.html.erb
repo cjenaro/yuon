@@ -1,11 +1,11 @@
 <% content_for :title, "Edit: #{@page.title}" %>
 
 <div class="page-edit">
-  <h1 class="text-2xl font-bold mb-6">Edit Page</h1>
+  <h1 class="text-2xl font-bold mb-6 text-fg-800 dark:text-fg-100">Edit Page</h1>
   
   <%= render "form", page: @page %>
   
   <div class="mt-4">
-    <%= link_to "Cancel", @page, class: "text-blue-500 hover:text-blue-700" %>
+    <%= link_to "Cancel", @page, class: "text-accent-600 hover:text-accent-800 dark:text-accent-400 dark:hover:text-accent-300" %>
   </div>
 </div> 

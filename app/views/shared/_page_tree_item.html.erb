@@ -2,7 +2,7 @@
 <div class="page-item mb-1" data-sidebar-target="pageItem" data-page-id="<%= page.id %>">
   <div class="flex items-center justify-between gap-2">
     <% if page.child_pages.any? %>
-        <button class="cursor-pointer toggle-children text-gray-500 hover:text-gray-700" data-action="click->sidebar#toggleChildren">
+        <button class="cursor-pointer toggle-children text-fg-500 hover:text-fg-700 dark:text-fg-400 dark:hover:text-fg-300" data-action="click->sidebar#toggleChildren">
             <svg class="h-4 w-4 <%= expanded ? 'transform rotate-180' : '' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -10,22 +10,22 @@
     <% end %>
 
     <div class="flex items-center flex-grow">
-      <%= link_to page.title, page_path(page), class: "text-gray-700 hover:text-blue-500 truncate flex-grow" %>
+      <%= link_to page.title, page_path(page), class: "text-fg-700 hover:text-accent-600 dark:text-fg-300 dark:hover:text-accent-400 truncate flex-grow" %>
       
       <div class="relative ml-2 page-actions">
-        <button class="cursor-pointer text-gray-500 hover:text-gray-700 focus:outline-none" id="page-menu-<%= page.id %>" data-action="click->sidebar#toggleMenu">
+        <button class="cursor-pointer text-fg-500 hover:text-fg-700 dark:text-fg-400 dark:hover:text-fg-300 focus:outline-none" id="page-menu-<%= page.id %>" data-action="click->sidebar#toggleMenu">
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
           </svg>
         </button>
-        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden" id="page-menu-dropdown-<%= page.id %>">
-          <%= link_to new_page_path(parent_page_id: page.id), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
+        <div class="absolute right-0 mt-2 w-48 bg-bg-50 rounded-md shadow-lg py-1 z-10 hidden dark:bg-bg-800 dark:border dark:border-bg-700" id="page-menu-dropdown-<%= page.id %>">
+          <%= link_to new_page_path(parent_page_id: page.id), class: "block px-4 py-2 text-sm text-fg-700 hover:bg-bg-100 dark:text-fg-300 dark:hover:bg-bg-700" do %>
             <svg class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
             Add Child Page
           <% end %>
-          <%= link_to edit_page_path(page), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
+          <%= link_to edit_page_path(page), class: "block px-4 py-2 text-sm text-fg-700 hover:bg-bg-100 dark:text-fg-300 dark:hover:bg-bg-700" do %>
             <svg class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
@@ -38,7 +38,7 @@
   </div>
   
   <% if page.child_pages.any? %>
-    <div class="children pl-2 ml-2 border-l-2 border-gray-300 mt-1 <%= expanded ? '' : 'hidden' %>">
+    <div class="children pl-2 ml-2 border-l-2 border-bg-300 mt-1 dark:border-bg-600 <%= expanded ? '' : 'hidden' %>">
       <% page.child_pages.each do |child| %>
         <%= render partial: 'shared/page_tree_item', locals: { page: child } %>
       <% end %>

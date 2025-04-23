@@ -1,6 +1,6 @@
 <%= form_with(model: page) do |form| %>
   <% if page.errors.any? %>
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    <div class="bg-bg-100 border border-fg-300 text-fg-700 px-4 py-3 rounded mb-4 dark:bg-bg-800 dark:text-fg-300 dark:border-fg-600">
       <h2><%= pluralize(page.errors.count, "error") %> prohibited this page from being saved:</h2>
       <ul>
         <% page.errors.each do |error| %>
@@ -11,24 +11,24 @@
   <% end %>
 
   <div class="mb-4">
-    <%= form.label :title, class: "block text-gray-700 font-medium mb-2" %>
-    <%= form.text_field :title, class: "w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :title, class: "block text-fg-700 font-medium mb-2 dark:text-fg-300" %>
+    <%= form.text_field :title, class: "w-full border border-bg-300 bg-bg-50 text-fg-800 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 dark:border-bg-600 dark:bg-bg-700 dark:text-fg-200" %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :parent_page_id, "Parent Page (optional)", class: "block text-gray-700 font-medium mb-2" %>
-    <%= form.collection_select :parent_page_id, Current.user.pages.where.not(id: page.id), :id, :title, { include_blank: "None (top-level page)" }, class: "w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :parent_page_id, "Parent Page (optional)", class: "block text-fg-700 font-medium mb-2 dark:text-fg-300" %>
+    <%= form.collection_select :parent_page_id, Current.user.pages.where.not(id: page.id), :id, :title, { include_blank: "None (top-level page)" }, class: "w-full border border-bg-300 bg-bg-50 text-fg-800 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 dark:border-bg-600 dark:bg-bg-700 dark:text-fg-200" %>
   </div>
 
   <div class="mb-4">
     <div class="flex items-center">
-      <%= form.check_box :is_public, class: "mr-2" %>
-      <%= form.label :is_public, "Make this page public", class: "text-gray-700" %>
+      <%= form.check_box :is_public, class: "mr-2 accent-accent-500" %>
+      <%= form.label :is_public, "Make this page public", class: "text-fg-700 dark:text-fg-300" %>
     </div>
-    <p class="text-sm text-gray-500 mt-1">Public pages can be viewed by anyone with the link.</p>
+    <p class="text-sm text-fg-500 mt-1 dark:text-fg-400">Public pages can be viewed by anyone with the link.</p>
   </div>
 
   <div class="flex justify-end">
-    <%= form.submit class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" %>
+    <%= form.submit class: "bg-accent-500 hover:bg-accent-600 text-bg-50 px-4 py-2 rounded dark:bg-accent-600 dark:hover:bg-accent-700" %>
   </div>
 <% end %> 

@@ -4,10 +4,10 @@
 
 <div class="max-w-[65ch] mx-auto px-4 lg:px-0">
   <div class="flex gap-4 items-center mb-6 relative group">
-    <h1 class="text-5xl font-bold"><%= @page.title %></h1>
+    <h1 class="text-5xl font-bold text-fg-800 dark:text-fg-100"><%= @page.title %></h1>
     
-    <div class="hidden group-hover:flex items-center space-x-2 rounded bg-white border border-gray-200 p-1">
-      <%= link_to edit_page_path(@page), class: "p-1 text-blue-500 hover:bg-blue-50" do %>
+    <div class="hidden group-hover:flex items-center space-x-2 rounded bg-bg-50 border border-bg-200 p-1 dark:bg-bg-800 dark:border-bg-700">
+      <%= link_to edit_page_path(@page), class: "p-1 text-accent-600 hover:bg-bg-100 dark:text-accent-400 dark:hover:bg-bg-700 rounded" do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
         </svg>
@@ -15,7 +15,7 @@
       
       <%= button_to page_path(@page), 
                   method: :delete, 
-                  class: "p-1 flex text-red-500 hover:bg-red-50 cursor-pointer",
+                  class: "p-1 flex text-fg-700 hover:bg-bg-100 cursor-pointer dark:text-fg-300 dark:hover:bg-bg-700 rounded",
                   data: { 
                     controller: "confirm-action",
                     action: "click->confirm-action#confirm",
@@ -32,10 +32,10 @@
 
   <% if @page.child_pages.any? %>
     <div class="mb-6">
-      <ul class="list-disc pl-5">
+      <ul class="list-disc pl-5 text-fg-700 dark:text-fg-300">
         <% @page.child_pages.each do |child| %>
           <li class="mb-1">
-            <%= link_to child.title, page_path(child), class: "font-bold hover:underline" %>
+            <%= link_to child.title, page_path(child), class: "font-bold hover:text-accent-600 dark:hover:text-accent-400" %>
           </li>
         <% end %>
       </ul>

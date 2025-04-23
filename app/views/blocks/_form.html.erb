@@ -6,7 +6,7 @@
     <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
-                      class: "w-full focus:outline-none text-4xl font-bold", 
+                      class: "w-full focus:outline-none text-4xl font-bold text-fg-800 dark:text-fg-100", 
                       autofocus: true,
                       placeholder: "Heading 1...",
                       data: { controller: "cursor-position" } %>
@@ -15,7 +15,7 @@
     <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
-                      class: "w-full focus:outline-none text-3xl font-bold", 
+                      class: "w-full focus:outline-none text-3xl font-bold text-fg-800 dark:text-fg-100", 
                       autofocus: true,
                       placeholder: "Heading 2...",
                       data: { controller: "cursor-position" } %>
@@ -24,7 +24,7 @@
     <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
-                      class: "w-full focus:outline-none text-2xl font-bold", 
+                      class: "w-full focus:outline-none text-2xl font-bold text-fg-800 dark:text-fg-100", 
                       autofocus: true,
                       placeholder: "Heading 3...",
                       data: { controller: "cursor-position" } %>
@@ -33,7 +33,7 @@
     <div class="flex-grow">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
-                      class: "w-full focus:outline-none prose-p", 
+                      class: "w-full focus:outline-none prose-p text-fg-700 dark:text-fg-300", 
                       autofocus: true, 
                       placeholder: "Some text...",
                       data: { controller: "cursor-position" } %>
@@ -42,7 +42,7 @@
     <div class="flex-grow flex flex-col gap-2">
       <div class="flex-grow">
         <%= f.file_field :image, 
-                      class: "w-full focus:outline-none", 
+                      class: "w-full focus:outline-none text-fg-700 dark:text-fg-300", 
                       autofocus: true,
                       accept: "image/*",
                       data: { controller: "cursor-position" } %>
@@ -51,7 +51,7 @@
       <div class="flex-grow">
         <%= f.text_field :content, 
                       value: @block.blockable&.content,
-                      class: "w-full focus:outline-none text-sm text-gray-500 italic", 
+                      class: "w-full focus:outline-none text-sm text-fg-500 italic dark:text-fg-400", 
                       placeholder: "Image caption (optional)...",
                       data: { controller: "cursor-position" } %>
       </div>
@@ -62,18 +62,18 @@
         <%= f.select :language, 
                     options_for_select(Block::Code.languages.keys.map { |lang| [lang.humanize, lang] }, @block.blockable&.language),
                     {},
-                    class: "w-full focus:outline-none", 
+                    class: "w-full focus:outline-none border border-bg-300 rounded p-1 text-fg-700 dark:border-bg-600 dark:bg-bg-700 dark:text-fg-300", 
                     autofocus: true,
                     placeholder: "Language (e.g. javascript, ruby, html)...",
                     data: { controller: "cursor-position" } %>
       </div>
       
-      <hr class="w-full border-gray-200">
+      <hr class="w-full border-bg-200 dark:border-bg-700">
       
       <div class="flex-grow">
         <%= f.text_area :content, 
                         value: @block.blockable&.content,
-                        class: "w-full focus:outline-none min-h-[150px] font-mono text-sm bg-gray-50 p-4 rounded-md", 
+                        class: "w-full focus:outline-none min-h-[150px] font-mono text-sm bg-bg-50 p-4 rounded-md border border-bg-200 text-fg-800 dark:bg-bg-800 dark:border-bg-700 dark:text-fg-200", 
                         placeholder: "Paste or type code here...",
                         data: { controller: "cursor-position" } %>
       </div>
@@ -82,7 +82,7 @@
     <div class="flex-grow">
       <%= f.text_field :content, 
                      value: @block.blockable&.content,
-                     class: "w-full focus:outline-none", 
+                     class: "w-full focus:outline-none text-fg-700 dark:text-fg-300", 
                      autofocus: true,
                      placeholder: "List item...",
                      data: { controller: "cursor-position" } %>
@@ -91,14 +91,14 @@
     <div class="flex-grow ">
       <%= f.text_field :content, 
                       value: @block.blockable&.content,
-                      class: "w-full focus:outline-none", 
+                      class: "w-full focus:outline-none text-fg-700 dark:text-fg-300", 
                       autofocus: true,
                       placeholder: "Enter content...",
                       data: { controller: "cursor-position" } %>
     </div>
   <% end %>
   
-  <%= f.button type: "submit", class: "text-blue-600 hover:text-blue-800 focus:outline-none", aria: { label: "Add Block" } do %>
+  <%= f.button type: "submit", class: "text-accent-600 hover:text-accent-800 focus:outline-none dark:text-accent-400 dark:hover:text-accent-300", aria: { label: "Add Block" } do %>
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
     </svg>
