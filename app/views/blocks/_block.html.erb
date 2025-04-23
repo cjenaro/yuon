@@ -33,7 +33,7 @@
     <% end %>
     
     <%= render 'blocks/block_menu', block: block, 
-                  first_item: first_item,
-                  last_item: last_item %>
+                  first_item: first_item ||= false,
+                  last_item: last_item ||= false %>
   </div>
 <% end %> 

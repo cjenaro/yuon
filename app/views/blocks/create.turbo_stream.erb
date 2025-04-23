@@ -4,7 +4,7 @@
   <% end %>
 <% else %>
   <%= turbo_stream.append "blocks" do %>
-    <%= render "blocks/block", block: @block %>
+    <%= render "blocks/block", block: @block, first_item: false, last_item: true %>
   <% end %>
 <% end %>
 
