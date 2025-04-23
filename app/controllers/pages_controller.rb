@@ -1,14 +1,15 @@
 class PagesController < ApplicationController
-  skip_before_action :require_authentication, only: [:show]
-  before_action :authenticate_for_page, only: [:show]
+  allow_unauthenticated_access only: [ :show ]
   before_action :set_page, only: [ :show, :edit, :update, :destroy ]
   before_action :set_breadcrumbs, only: [ :show, :edit ]
+  before_action :authorize_page_access, only: [ :show ]
 
   def index
     @pages = Current.user.pages.where(parent_page_id: nil)
   end
 
   def show
+    resume_session
   end
 
   def new
@@ -50,16 +51,11 @@ class PagesController < ApplicationController
   private
 
   def set_page
-    return if @page.present?
-    
-    @page = if Current.user
-      Current.user.pages.find(params[:id])
-    else
-      Page.find_by(id: params[:id], is_public: true)
-    end
-    
+    @page = Page.find_by(id: params[:id])
+
     unless @page
-      redirect_to pages_path, alert: "Page not found or you don't have access to it."
+      redirect_to Current.user ? pages_path : new_session_path,
+                   alert: "Page not found."
     end
   end
 
@@ -79,21 +75,26 @@ class PagesController < ApplicationController
     @breadcrumbs.reverse!
   end
 
-  def page_params
-    params.require(:page).permit(:title, :parent_page_id, :is_public)
-  end
+  def authorize_page_access
+    # Public pages can be viewed by anyone
+    return true if @page.is_public
 
-  def authenticate_for_page
-    return true if Current.user
-    
-    page = Page.find_by(id: params[:id])
-    if page&.is_public
-      @page = page
-      set_breadcrumbs
-      return true
-    else
+    # Non-public pages require authentication
+    unless authenticated?
       redirect_to new_session_path, alert: "Please sign in to access this page."
       return false
     end
+
+    # Check if authenticated user has access
+    unless @page.user_id == Current.user.id || @page.shared_users.include?(Current.user)
+      redirect_to pages_path, alert: "You don't have access to this page."
+      return false
+    end
+
+    true
+  end
+
+  def page_params
+    params.require(:page).permit(:title, :parent_page_id, :is_public)
   end
 end
