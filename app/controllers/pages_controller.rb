@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!
+  skip_before_action :require_authentication, only: [:show]
+  before_action :authenticate_for_page, only: [:show]
   before_action :set_page, only: [ :show, :edit, :update, :destroy ]
   before_action :set_breadcrumbs, only: [ :show, :edit ]
 
@@ -49,9 +50,17 @@ class PagesController < ApplicationController
   private
 
   def set_page
-    @page = Current.user.pages.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to pages_path, alert: "Page not found or you don't have access to it."
+    return if @page.present?
+    
+    @page = if Current.user
+      Current.user.pages.find(params[:id])
+    else
+      Page.find_by(id: params[:id], is_public: true)
+    end
+    
+    unless @page
+      redirect_to pages_path, alert: "Page not found or you don't have access to it."
+    end
   end
 
   def set_breadcrumbs
@@ -74,7 +83,17 @@ class PagesController < ApplicationController
     params.require(:page).permit(:title, :parent_page_id, :is_public)
   end
 
-  def authenticate_user!
-    redirect_to new_session_path, alert: "Please sign in to access pages." unless Current.user
+  def authenticate_for_page
+    return true if Current.user
+    
+    page = Page.find_by(id: params[:id])
+    if page&.is_public
+      @page = page
+      set_breadcrumbs
+      return true
+    else
+      redirect_to new_session_path, alert: "Please sign in to access this page."
+      return false
+    end
   end
 end
