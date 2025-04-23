@@ -9,7 +9,7 @@ class Page < ApplicationRecord
   has_many :shared_users, through: :page_accesses, source: :user
 
   validates :title, presence: true
-  
+
   # group list items together
   def grouped_blocks
     blocks_array = blocks.order(:position).to_a
