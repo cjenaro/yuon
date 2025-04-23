@@ -22,13 +22,16 @@ class BlocksController < ApplicationController
 
   def update
     blockable = @block.blockable
-
     valid_attributes = block_params.slice(*blockable.class.attribute_names)
 
     if blockable.update(valid_attributes)
       respond_to do |format|
         format.html { redirect_to @page }
-        format.turbo_stream
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.replace("blocks", 
+            partial: "pages/blocks", 
+            locals: { page: @page }) 
+        }
       end
     else
       respond_to do |format|
@@ -43,7 +46,11 @@ class BlocksController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @page }
-      format.turbo_stream
+      format.turbo_stream { 
+        render turbo_stream: turbo_stream.replace("blocks", 
+          partial: "pages/blocks", 
+          locals: { page: @page }) 
+      }
     end
   end
 
@@ -57,7 +64,11 @@ class BlocksController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to @page }
-        format.turbo_stream { render :reorder }
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.replace("blocks", 
+            partial: "pages/blocks", 
+            locals: { page: @page }) 
+          }
       end
     else
       redirect_to @page
@@ -74,7 +85,11 @@ class BlocksController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to @page }
-        format.turbo_stream { render :reorder }
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.replace("blocks", 
+            partial: "pages/blocks", 
+            locals: { page: @page }) 
+          }
       end
     else
       redirect_to @page

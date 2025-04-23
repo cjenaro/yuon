@@ -1,0 +1,20 @@
+<% is_ordered = list_type == 'Block::OrderedListItem' %>
+<% tag_name = is_ordered ? 'ol' : 'ul' %>
+<% list_class = is_ordered ? 'list-decimal' : 'list-disc' %>
+
+<<%= tag_name %> class="<%= list_class %> ml-5">
+  <% blocks.each_with_index do |block, index| %>
+    <li>
+      <%= block.blockable.content %>
+      <div class="inline-block ml-2">
+        <%= render 'blocks/block_menu', 
+                  block: block, 
+                  container_class: "inline-flex opacity-0 group-hover:opacity-100 transition-opacity", 
+                  button_class: "inline-flex p-1", 
+                  icon_class: "size-4",
+                  first_item: index == 0,
+                  last_item: index == blocks.size - 1 %>
+      </div>
+    </li>
+  <% end %>
+</<%= tag_name %>> 

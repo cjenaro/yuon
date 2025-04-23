@@ -78,6 +78,15 @@
                         data: { controller: "cursor-position" } %>
       </div>
     </div>
+  <% when 'ordered_list_item', 'unordered_list_item' %>
+    <div class="flex-grow">
+      <%= f.text_field :content, 
+                     value: @block.blockable&.content,
+                     class: "w-full focus:outline-none", 
+                     autofocus: true,
+                     placeholder: "List item...",
+                     data: { controller: "cursor-position" } %>
+    </div>
   <% else %>
     <div class="flex-grow ">
       <%= f.text_field :content, 

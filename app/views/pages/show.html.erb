@@ -40,11 +40,7 @@
     </div>
   <% end %>
 
-  <div id="blocks" class="prose">
-    <% @page.blocks.order(:position).each do |block| %>
-      <%= render 'blocks/block', block: block %>
-    <% end %>
-  </div>
+  <%= render 'blocks', page: @page %>
 
   <div class="mt-6 relative">
     <%= turbo_frame_tag "block_form_container" do %>

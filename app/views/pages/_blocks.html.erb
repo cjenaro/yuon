@@ -1,0 +1,11 @@
+<div id="blocks" class="prose">
+  <% page.grouped_blocks.each do |item| %>
+    <% if item.is_a?(Hash) %>
+      <div class="group">
+        <%= render 'blocks/list_group', list_type: item[:type], blocks: item[:blocks] %>
+      </div>
+    <% else %>
+      <%= render 'blocks/block', block: item %>
+    <% end %>
+  <% end %>
+</div> 

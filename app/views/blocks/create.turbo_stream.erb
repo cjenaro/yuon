@@ -1,5 +1,11 @@
-<%= turbo_stream.append "blocks" do %>
-  <%= render "blocks/block", block: @block %>
+<% if @block.blockable_type.in?(['Block::OrderedListItem', 'Block::UnorderedListItem']) %>
+  <%= turbo_stream.replace "blocks" do %>
+    <%= render "pages/blocks", page: @page %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.append "blocks" do %>
+    <%= render "blocks/block", block: @block %>
+  <% end %>
 <% end %>
 
 <%= turbo_stream.replace "block_form_container" do %>
