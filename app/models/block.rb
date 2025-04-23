@@ -1,6 +1,7 @@
 class Block < ApplicationRecord
   belongs_to :page
   acts_as_list scope: :page
+  broadcasts_to :page
 
   belongs_to :blockable, polymorphic: true, dependent: :destroy
 
